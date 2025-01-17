@@ -21,17 +21,7 @@ type LoginInput struct {
     Password string `json:"password" binding:"required"`
 }
 
-// Registergodoc
-// @Summary Registrasi User
-// @Description Registrasi User supaya terdaftar di database
-// @Tags Users
-// @Accept  json
-// @Produce  json
-// @Param Users body models.User true "Data User"
-// @Success 200 {object} models.User
-// @Failure 400 {object} map[string]interface{}
-// @Failure 500 {object} map[string]interface{}
-// @Router /register [post]
+
 func Register(c *gin.Context) {
     var input RegisterInput
     if err := c.ShouldBindJSON(&input); err != nil {
@@ -47,18 +37,7 @@ func Register(c *gin.Context) {
 }
 
 
-// Logingodoc
-// @Summary Login User
-// @Description Login user sesuai username dan password di database
-// @Tags User
-// @Accept  json
-// @Produce  json
-// @Param Users body models.User true "Data User"
-// @Success 200 {object} models.User
-// @Failure 400 {object} map[string]interface{}
-// @Failure 500 {object} map[string]interface{}
-// @Router /login [post]
-// User Registration Function
+
 func Login(c *gin.Context) {
     var input LoginInput
     var user models.User
@@ -92,17 +71,7 @@ func Login(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"token": tokenString})
 }
 
-// Logoutgodoc
-// @Summary Logout User
-// @Description Logout User
-// @Tags User
-// @Accept  json
-// @Produce  json
-// @Param Users body models.User true "Data User"
-// @Success 200 {object} models.User
-// @Failure 400 {object} map[string]interface{}
-// @Failure 500 {object} map[string]interface{}
-// @Router /logout [post]
+
 func Logout(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"message": "Logout berhasil"})
 }
