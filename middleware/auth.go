@@ -9,7 +9,7 @@ import (
 
 func Auth() gin.HandlerFunc {
     return func(c *gin.Context) {
-       
+        
         tokenString := c.GetHeader("Authorization")
         if tokenString == "" {
             c.JSON(http.StatusUnauthorized, gin.H{"error": "Header Authorization tidak ditemukan"})
@@ -17,14 +17,14 @@ func Auth() gin.HandlerFunc {
             return
         }
 
-        
+
         if !strings.HasPrefix(tokenString, "Bearer ") {
             c.JSON(http.StatusUnauthorized, gin.H{"error": "Format token tidak valid. Harus diawali dengan 'Bearer '"})
             c.Abort()
             return
         }
 
-       
+
         tokenString = strings.TrimPrefix(tokenString, "Bearer ")
 
 
@@ -35,9 +35,7 @@ func Auth() gin.HandlerFunc {
             return
         }
 
-
         c.Set("user_id", claims.UserID)
-
 
         c.Next()
     }

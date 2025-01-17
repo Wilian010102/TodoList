@@ -16,16 +16,14 @@ func main() {
     }
     config.ConnectDB()
 
-    // Inisialisasi router Gin
     router := gin.Default()
 
-    // Inisialisasi routing lainnya
     routes.SetupRoutes(router)
 
-    // Jalankan server
+
     port := os.Getenv("PORT")
     if port == "" {
-        port = "8081" // default port jika tidak ada di .env
+        port = "8081" 
     }
     router.Run(":" + port)
 }
