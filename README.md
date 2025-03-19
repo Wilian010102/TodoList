@@ -11,4 +11,5 @@
    - `http://localhost:8081/api/v1/list/id`  
    - `http://localhost:8081/api/v1/item`  
    - `http://localhost:8081/api/v1/item/:id`  
-   - `http://localhost:8081/api/v1/item/:id/status`  
+   - `http://localhost:8081/api/v1/item/:id/status`
+   - `http://localhost:8081/api/v1/logout`
