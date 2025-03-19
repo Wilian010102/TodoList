@@ -7,8 +7,11 @@
 
 3. Check API  
    **URL endpoint**:  
+   - `http://localhost:8081/api/v1/register`
+   - `http://localhost:8081/api/v1/login`
    - `http://localhost:8081/api/v1/list`  
-   - `http://localhost:8081/api/v1/list/id`  
+   - `http://localhost:8081/api/v1/list/id`
+   - `http://localhost:8081/api/v1/list/id/item`  
    - `http://localhost:8081/api/v1/item`  
    - `http://localhost:8081/api/v1/item/:id`  
    - `http://localhost:8081/api/v1/item/:id/status`
