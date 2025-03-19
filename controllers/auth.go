@@ -47,7 +47,7 @@ func Login(c *gin.Context) {
         return
     }
 
-    // Search User Based on Usernama
+    // Search User Based on Username
     config.DB.Where("username = ?", input.Username).First(&user)
 
     // Password verification

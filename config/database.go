@@ -1,11 +1,12 @@
 package config
 
 import (
-    "fmt"
-    "github.com/jinzhu/gorm"
-    _ "github.com/jinzhu/gorm/dialects/postgres"
-    "TodoList/models"
-    "os"
+	"TodoList/models"
+	"fmt"
+	"os"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 var DB *gorm.DB
