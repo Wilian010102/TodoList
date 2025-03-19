@@ -22,5 +22,5 @@ func ConnectDB() {
         panic("Gagal koneksi ke database!")
     }
     DB = db
-    DB.AutoMigrate(&models.Checklist{}, &models.Item{}, &models.User{}) // Migrasi otomatis model Mahasiswa dan User
+    DB.AutoMigrate(&models.Checklist{}, &models.Item{}, &models.User{})
 }

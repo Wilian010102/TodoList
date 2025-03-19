@@ -8,6 +8,7 @@ import (
 type Checklist struct {
 	gorm.Model
 	Title string `json:"title" gorm:"type:varchar(100);not null"`
+	UserID uint   `json:"user_id"`
 	Items []Item `json:"items" gorm:"constraint:OnDelete:CASCADE"` // Relasi dengan tabel Item
 }
 

@@ -1,48 +1,42 @@
 package utils
 
 import (
-	"errors"
-	"strconv"
-	"time"
-
-	"github.com/golang-jwt/jwt/v4"
+    "errors"
+    "time"
+    "github.com/golang-jwt/jwt/v4"
+    "log"
 )
 
-type Claims struct {
-    UserID uint `json:"user_id"` 
-    jwt.StandardClaims
-}
-
+// Secret key for JWT
 var jwtKey = []byte("supersecretkey")
 
-func GenerateToken(userID string) (string, error) {
-    
-    id, err := strconv.ParseUint(userID, 10, 32) 
-    if err != nil {
-        return "", errors.New("userID tidak valid")
-    }
-
-    expirationTime := time.Now().Add(24 * time.Hour) 
-    claims := &Claims{
-        UserID: uint(id), 
-        StandardClaims: jwt.StandardClaims{
-            ExpiresAt: expirationTime.Unix(),
-        },
-    }
-
-    token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-    return token.SignedString(jwtKey)
+type Claims struct {
+    UserID uint `json:"user_id"`
+    jwt.RegisteredClaims
 }
 
 func VerifyToken(tokenString string) (*Claims, error) {
     claims := &Claims{}
+
     token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
         return jwtKey, nil
     })
 
-    if err != nil || !token.Valid {
-        return nil, errors.New("token tidak valid")
+    if err != nil {
+        log.Println("JWT Parsing Error:", err)
+        return nil, errors.New("token not valid")
     }
 
+    if !token.Valid {
+        log.Println("JWT Token not valid")
+        return nil, errors.New("token not valid")
+    }
+
+    if time.Now().Unix() > claims.ExpiresAt.Time.Unix() {
+        log.Println("JWT Token expired")
+        return nil, errors.New("token expired")
+    }
+
+    log.Println("JWT Valid for user_id:", claims.UserID)
     return claims, nil
 }
